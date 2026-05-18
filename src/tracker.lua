@@ -43,9 +43,16 @@ end
 ---@param run table
 function tracker.CreateState(run)
 	local pending = {}
+	local assignedBiome = {}
 	for _, npc in ipairs(FIELD_NPCS) do
 		if tracker.IsFieldNPCEnabled(npc) then
 			pending[npc] = true
+			if config.randomizeFieldNPCBiome then
+				assignedBiome[npc] = encounters.PickRandomBiomeForNPC(npc)
+				if assignedBiome[npc] ~= nil then
+					tracker.DebugLog("Assigned " .. npc .. " to biome " .. assignedBiome[npc])
+				end
+			end
 		end
 	end
 
@@ -63,6 +70,7 @@ function tracker.CreateState(run)
 
 	return {
 		Pending = pending,
+		AssignedBiome = assignedBiome,
 		BiomesEntered = {},
 		ActiveForceNPC = nil,
 		PendingZagContract = pendingZagContract,
@@ -137,22 +145,17 @@ function tracker.IsNPCEligibleForBiomeThisRun(run, npc, biome)
 	if not tracker.IsPending(run, npc) then
 		return false
 	end
-	local biomes = encounters.BiomesByNPC[npc]
-	if biomes == nil then
+	local state = tracker.GetState(run)
+	if state == nil or not encounters.NPCCanAppearInBiome(npc, biome) then
 		return false
 	end
-	local canSpawnHere = false
-	for _, b in ipairs(biomes) do
-		if b == biome then
-			canSpawnHere = true
-			break
+	if config.randomizeFieldNPCBiome then
+		local assigned = state.AssignedBiome and state.AssignedBiome[npc]
+		if assigned == nil or assigned ~= biome then
+			return false
 		end
 	end
-	if not canSpawnHere then
-		return false
-	end
-	local state = tracker.GetState(run)
-	return state ~= nil and state.BiomesEntered[biome] == true
+	return state.BiomesEntered[biome] == true
 end
 
 ---@param run table

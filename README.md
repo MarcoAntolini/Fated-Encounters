@@ -6,9 +6,11 @@ Install with [r2modman](https://thunderstore.io/c/hades-ii/p/ebkr/r2modman/) or 
 
 ## How it works
 
-- **Field NPCs:** For each enabled NPC, the mod tracks which biomes you enter and forces a pending encounter when you are eligible, instead of leaving it to RNG and cooldowns.
-- **Zagreus:** After True Ending, can guarantee the Infernal Contract on runs where that content is unlocked.
-- **Chronos:** After True Ending, can guarantee the Neo-Chronos clearing encounter.
+- **Field NPCs:** Each enabled NPC is guaranteed **once per run**. The mod forces their field encounter in an eligible biome after you enter that biome, then stops tracking them for the rest of the run.
+  - **Default:** The biome is whichever eligible region you reach **first** on your route.
+  - **Optional (`randomizeFieldNPCBiome`):** At run start, each NPC is assigned **one random** eligible biome and is only forced there (you must still visit that biome).
+- **Zagreus:** After True Ending, can guarantee the Infernal Contract once per run where that content is unlocked.
+- **Chronos:** After True Ending, can guarantee the Neo-Chronos clearing encounter once per run.
 
 ## Configuration
 
@@ -24,19 +26,21 @@ Defaults live in `src/config.lua`. The first time you load the mod, Chalk create
 |--------|------|---------|-------------|
 | `enabled` | bool | `true` | Master switch for the whole mod. |
 | `guaranteeFieldNPCs` | bool | `true` | Master switch for all field NPC guarantees. When `false`, every `fieldNPCs.*` option is ignored. |
-| `fieldNPCs.Nemesis` | bool | `true` | Guarantee Nemesis in biomes you visit this run. |
-| `fieldNPCs.Artemis` | bool | `true` | Guarantee Artemis in biomes you visit this run. |
-| `fieldNPCs.Heracles` | bool | `true` | Guarantee Heracles in biomes you visit this run. |
-| `fieldNPCs.Icarus` | bool | `true` | Guarantee Icarus in biomes you visit this run. |
-| `fieldNPCs.Athena` | bool | `true` | Guarantee Athena in biomes you visit this run. |
-| `guaranteeZagContract` | bool | `true` | After True Ending: guarantee Zagreus Infernal Contract when unlocked. |
-| `guaranteeChronosClearing` | bool | `true` | After True Ending: guarantee Neo-Chronos clearing. |
+| `fieldNPCs.Nemesis` | bool | `true` | Guarantee meeting Nemesis **once** this run. |
+| `fieldNPCs.Artemis` | bool | `true` | Guarantee meeting Artemis **once** this run. |
+| `fieldNPCs.Heracles` | bool | `true` | Guarantee meeting Heracles **once** this run. |
+| `fieldNPCs.Icarus` | bool | `true` | Guarantee meeting Icarus **once** this run. |
+| `fieldNPCs.Athena` | bool | `true` | Guarantee meeting Athena **once** this run. |
+| `randomizeFieldNPCBiome` | bool | `false` | Pick a random eligible biome per field NPC at run start instead of the first biome you visit. |
+| `guaranteeZagContract` | bool | `true` | After True Ending: guarantee Zagreus Infernal Contract once per run when unlocked. |
+| `guaranteeChronosClearing` | bool | `true` | After True Ending: guarantee Neo-Chronos clearing once per run. |
 | `debugLog` | bool | `false` | Print `[FatedEncounters]` messages to the console. |
 
 ### Examples
 
 - **All field NPCs, no postgame:** `guaranteeFieldNPCs = true`, all `fieldNPCs.* = true`, `guaranteeZagContract = false`, `guaranteeChronosClearing = false`.
 - **Only Nemesis and Artemis:** `guaranteeFieldNPCs = true`, enable only those two under `fieldNPCs`, disable the rest.
+- **Random biomes each run:** `randomizeFieldNPCBiome = true` (with field NPCs enabled). Check `debugLog` to see assigned biomes in the console.
 - **Turn off all field guarantees but keep Chronos:** `guaranteeFieldNPCs = false`, `guaranteeChronosClearing = true` (requires True Ending progress in your save).
 
 ## Development

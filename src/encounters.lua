@@ -10,7 +10,7 @@ encounters = {}
 -- Order used when multiple NPCs are pending in the same biome.
 encounters.NPCPriority = { "Nemesis", "Artemis", "Heracles", "Icarus", "Athena" }
 
--- Biomes where each NPC can appear in vanilla pools (player must visit to trigger guarantee).
+-- Biomes where each NPC can appear in vanilla pools (player must visit one to trigger guarantee).
 encounters.BiomesByNPC = {
 	Nemesis = { "F", "G", "H", "I" },
 	Artemis = { "F", "G", "N" },
@@ -201,6 +201,35 @@ function encounters.RoomSetToBiome(roomSetName)
 		end
 	end
 	return nil
+end
+
+---@param npc FatedNPC
+---@return FatedBiome|nil
+function encounters.PickRandomBiomeForNPC(npc)
+	local biomes = encounters.BiomesByNPC[npc]
+	if biomes == nil or #biomes == 0 then
+		return nil
+	end
+	if #biomes == 1 then
+		return biomes[1]
+	end
+	return biomes[RandomInt(#biomes)]
+end
+
+---@param npc FatedNPC
+---@param biome FatedBiome
+---@return boolean
+function encounters.NPCCanAppearInBiome(npc, biome)
+	local biomes = encounters.BiomesByNPC[npc]
+	if biomes == nil then
+		return false
+	end
+	for _, b in ipairs(biomes) do
+		if b == biome then
+			return true
+		end
+	end
+	return false
 end
 
 ---@param biome string
