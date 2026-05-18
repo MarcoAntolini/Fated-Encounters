@@ -1,5 +1,8 @@
 return {
-  version = 0;
-  enabled = true;
-  message = 'Hello World!';
+	version = 1;
+	enabled = true;
+	guaranteeFieldNPCs = true;
+	guaranteeZagContract = true;
+	guaranteeChronosClearing = true;
+	debugLog = false;
 }
