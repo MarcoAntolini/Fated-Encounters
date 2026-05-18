@@ -1,2 +1,2 @@
 ---@meta _
--- Reload-safe hook bodies live in tracker.lua and guarantee.lua (phase 3+ may add more here).
+-- Reload-safe hook bodies live in tracker.lua, guarantee.lua, zagreus.lua, and chronos.lua.

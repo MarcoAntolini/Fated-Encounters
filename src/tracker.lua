@@ -11,15 +11,33 @@ function tracker.DebugLog(message)
 	end
 end
 
-function tracker.CreateState()
+---@param run table
+function tracker.CreateState(run)
 	local pending = {}
-	for _, npc in ipairs(FIELD_NPCS) do
-		pending[npc] = true
+	if config.guaranteeFieldNPCs then
+		for _, npc in ipairs(FIELD_NPCS) do
+			pending[npc] = true
+		end
 	end
+
+	local pendingZagContract = false
+	local pendingChronosClearing = false
+	local reachedTrueEnding = game.GameState ~= nil and game.GameState.ReachedTrueEnding == true
+
+	if reachedTrueEnding and config.guaranteeZagContract and run ~= nil then
+		pendingZagContract = zagreus.IsInfernalContractUnlockedForRun(run)
+	end
+
+	if reachedTrueEnding and config.guaranteeChronosClearing then
+		pendingChronosClearing = true
+	end
+
 	return {
 		Pending = pending,
 		BiomesEntered = {},
 		ActiveForceNPC = nil,
+		PendingZagContract = pendingZagContract,
+		PendingChronosClearing = pendingChronosClearing,
 	}
 end
 
@@ -28,8 +46,14 @@ function tracker.InitRun(run)
 	if run == nil then
 		return
 	end
-	run.FatedEncounters = tracker.CreateState()
+	run.FatedEncounters = tracker.CreateState(run)
 	tracker.DebugLog("Initialized FatedEncounters run state")
+end
+
+function tracker.ShouldInitRun()
+	return config.guaranteeFieldNPCs
+		or config.guaranteeZagContract
+		or config.guaranteeChronosClearing
 end
 
 ---@param run table|nil
@@ -130,7 +154,7 @@ end
 
 function tracker.WrapStartNewRun(base, prevRun, args)
 	base(prevRun, args)
-	if config.guaranteeFieldNPCs and game.CurrentRun ~= nil then
+	if tracker.ShouldInitRun() and game.CurrentRun ~= nil then
 		tracker.InitRun(game.CurrentRun)
 	end
 end

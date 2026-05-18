@@ -3,6 +3,8 @@
 
 import 'encounters.lua'
 import 'tracker.lua'
+import 'zagreus.lua'
+import 'chronos.lua'
 import 'guarantee.lua'
 
 if not mod.HooksRegistered then

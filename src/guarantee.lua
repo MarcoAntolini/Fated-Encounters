@@ -189,6 +189,8 @@ function guarantee.RegisterHooks()
 	modutil.mod.Path.Wrap("RecordEncounter", tracker.WrapRecordEncounter, mod)
 	modutil.mod.Path.Wrap("IsEncounterEligible", guarantee.WrapIsEncounterEligible, mod)
 	modutil.mod.Path.Wrap("ChooseEncounter", guarantee.WrapChooseEncounter, mod)
+	zagreus.RegisterHooks()
+	chronos.RegisterHooks()
 end
 
 mod.Guarantee = guarantee
