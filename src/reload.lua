@@ -1,2 +1,2 @@
 ---@meta _
--- Reload-safe hooks and runtime logic (phase 2+).
+-- Reload-safe hook bodies live in tracker.lua and guarantee.lua (phase 3+ may add more here).
