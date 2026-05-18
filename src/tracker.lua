@@ -5,6 +5,35 @@ tracker = {}
 
 local FIELD_NPCS = { "Nemesis", "Artemis", "Heracles", "Icarus", "Athena" }
 
+---@param npc string
+---@return boolean
+function tracker.IsFieldNPCEnabled(npc)
+	if not config.guaranteeFieldNPCs then
+		return false
+	end
+	local perNpc = config.fieldNPCs
+	if perNpc == nil then
+		return true
+	end
+	local enabled = perNpc[npc]
+	if enabled == nil then
+		return true
+	end
+	return enabled == true
+end
+
+function tracker.HasAnyFieldNPCEnabled()
+	if not config.guaranteeFieldNPCs then
+		return false
+	end
+	for _, npc in ipairs(FIELD_NPCS) do
+		if tracker.IsFieldNPCEnabled(npc) then
+			return true
+		end
+	end
+	return false
+end
+
 function tracker.DebugLog(message)
 	if config.debugLog then
 		print("[FatedEncounters] " .. tostring(message))
@@ -14,8 +43,8 @@ end
 ---@param run table
 function tracker.CreateState(run)
 	local pending = {}
-	if config.guaranteeFieldNPCs then
-		for _, npc in ipairs(FIELD_NPCS) do
+	for _, npc in ipairs(FIELD_NPCS) do
+		if tracker.IsFieldNPCEnabled(npc) then
 			pending[npc] = true
 		end
 	end
@@ -51,7 +80,7 @@ function tracker.InitRun(run)
 end
 
 function tracker.ShouldInitRun()
-	return config.guaranteeFieldNPCs
+	return tracker.HasAnyFieldNPCEnabled()
 		or config.guaranteeZagContract
 		or config.guaranteeChronosClearing
 end
@@ -140,7 +169,7 @@ end
 ---@param run table
 ---@param encounter table
 function tracker.OnEncounterRecorded(run, encounter)
-	if not config.guaranteeFieldNPCs or encounter == nil or encounter.Name == nil then
+	if not tracker.HasAnyFieldNPCEnabled() or encounter == nil or encounter.Name == nil then
 		return
 	end
 	if encounters.IsIntroEncounter(encounter.Name) then
@@ -161,7 +190,7 @@ end
 
 function tracker.WrapStartRoom(base, currentRun, currentRoom)
 	base(currentRun, currentRoom)
-	if not config.guaranteeFieldNPCs or currentRun == nil or currentRoom == nil then
+	if not tracker.HasAnyFieldNPCEnabled() or currentRun == nil or currentRoom == nil then
 		return
 	end
 	local biome = encounters.RoomSetToBiome(currentRoom.RoomSetName)

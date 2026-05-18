@@ -12,7 +12,7 @@ end
 ---@param room table
 ---@return boolean
 function guarantee.ShouldProcessRoom(room)
-	if not config.guaranteeFieldNPCs then
+	if not tracker.HasAnyFieldNPCEnabled() then
 		return false
 	end
 	if room == nil or room.LegalEncounters == nil or room.LegalEncountersDictionary == nil then
