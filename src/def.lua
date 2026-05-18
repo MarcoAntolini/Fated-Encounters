@@ -2,7 +2,7 @@
 
 ---@alias FatedNPC "Nemesis" | "Artemis" | "Heracles" | "Icarus" | "Athena"
 
---- Per-NPC field guarantee toggles (ignored when `guaranteeFieldNPCs` is false).
+--- Per-NPC field guarantee toggles; each enabled NPC is guaranteed once per run.
 ---@class FatedEncountersFieldNPCConfig
 ---@field Nemesis boolean
 ---@field Artemis boolean
@@ -14,7 +14,6 @@
 ---@class FatedEncountersConfig
 ---@field version number Chalk merge version; do not edit unless you know why.
 ---@field enabled boolean Master switch for the entire mod.
----@field guaranteeFieldNPCs boolean Master switch for field NPC guarantees.
 ---@field fieldNPCs FatedEncountersFieldNPCConfig
 ---@field randomizeFieldNPCBiome boolean Pick a random eligible biome per field NPC at run start.
 ---@field guaranteeZagContract boolean After True Ending: guarantee Zagreus Infernal Contract once per run.

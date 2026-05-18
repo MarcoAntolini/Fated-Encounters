@@ -1,15 +1,17 @@
 # Changelog
 
-All notable changes to this project will be documented in this file.
-
-The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
-and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
-
 ## [Unreleased]
 
 ### Added
 
+- `config_migrate.lua` to upgrade existing user configs when the config schema version changes.
 - Contributing guide, README contributing section, and GitHub issue/PR templates.
+
+### Changed
+
+- Removed `guaranteeFieldNPCs` master switch; `fieldNPCs.*` toggles are now the only control for field NPC guarantees.
+- Config schema version bumped to `4`; migrating from v3 disables all `fieldNPCs.*` if `guaranteeFieldNPCs` was false (preserves Chronos-only setups).
+- README configuration table and examples updated for per-NPC field toggles.
 
 ## [0.2.0] - 2026-05-18
 

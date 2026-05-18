@@ -1,7 +1,6 @@
 local default = {
-	version = 3;
+	version = 4;
 	enabled = true;
-	guaranteeFieldNPCs = true;
 	fieldNPCs = {
 		Nemesis = true;
 		Artemis = true;
@@ -18,7 +17,6 @@ local default = {
 local descript = {
 	version = "Config schema version (used when new options are added).";
 	enabled = "Enable or disable the entire mod.";
-	guaranteeFieldNPCs = "Master switch for field NPC guarantees (Nemesis, Artemis, Heracles, Icarus, Athena). When off, the per-NPC options below are ignored.";
 	fieldNPCs = {
 		Nemesis = "Guarantee you meet Nemesis once this run (first eligible biome you visit, or a random one if randomizeFieldNPCBiome is on).";
 		Artemis = "Guarantee you meet Artemis once this run (first eligible biome you visit, or a random one if randomizeFieldNPCBiome is on).";

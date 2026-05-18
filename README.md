@@ -10,7 +10,7 @@ Install with [r2modman](https://thunderstore.io/c/hades-ii/p/ebkr/r2modman/) or 
 
 ## How it works
 
-- **Field NPCs:** Each enabled NPC is guaranteed **once per run**. The mod forces their field encounter in an eligible biome after you enter that biome, then stops tracking them for the rest of the run.
+- **Field NPCs:** Turn on each NPC under `fieldNPCs` in config. Each enabled NPC is guaranteed **once per run**. The mod forces their field encounter in an eligible biome after you enter that biome, then stops tracking them for the rest of the run.
   - **Default:** The biome is whichever eligible region you reach **first** on your route.
   - **Optional (`randomizeFieldNPCBiome`):** At run start, each NPC is assigned **one random** eligible biome and is only forced there (you must still visit that biome).
 - **Zagreus:** After True Ending, can guarantee the Infernal Contract once per run where that content is unlocked.
@@ -20,8 +20,6 @@ Install with [r2modman](https://thunderstore.io/c/hades-ii/p/ebkr/r2modman/) or 
 
 Settings are managed with [Chalk](https://thunderstore.io/c/hades-ii/p/SGG_Modding/Chalk/) and appear in **r2modman → Config** (or in your profile’s `ReturnOfModding/config/` as `MarcoAntolini-Fated-Encounters.cfg`).
 
-Defaults and in-game descriptions live in [`src/config.lua`](src/config.lua). On first load, Chalk creates or updates the `.cfg` from those defaults. Editing values in r2modman updates the `.cfg` only—you do not need to edit Lua unless you are developing the mod.
-
 **Note:** Config files persist even if you uninstall the mod. Delete or reset `MarcoAntolini-Fated-Encounters.cfg` manually for a clean slate.
 
 ### Options
@@ -29,7 +27,6 @@ Defaults and in-game descriptions live in [`src/config.lua`](src/config.lua). On
 | Option | Type | Default | Description |
 |--------|------|---------|-------------|
 | `enabled` | bool | `true` | Master switch for the entire mod. When `false`, hooks do not run. |
-| `guaranteeFieldNPCs` | bool | `true` | Master switch for all field NPC guarantees. When `false`, every `fieldNPCs.*` option is ignored. |
 | `fieldNPCs.Nemesis` | bool | `true` | Guarantee meeting Nemesis **once** this run. |
 | `fieldNPCs.Artemis` | bool | `true` | Guarantee meeting Artemis **once** this run. |
 | `fieldNPCs.Heracles` | bool | `true` | Guarantee meeting Heracles **once** this run. |
@@ -40,14 +37,14 @@ Defaults and in-game descriptions live in [`src/config.lua`](src/config.lua). On
 | `guaranteeChronosClearing` | bool | `true` | After True Ending: guarantee Neo-Chronos clearing once per run. |
 | `debugLog` | bool | `false` | Print `[FatedEncounters]` messages to the game console. |
 
-Internal key `version` (default `3`) is used by Chalk to merge new options into existing configs; you normally do not need to change it.
+Internal key `version` (default `4`) is used by Chalk to merge new options into existing configs; you normally do not need to change it.
 
 ### Examples
 
-- **All field NPCs, no postgame:** `enabled = true`, `guaranteeFieldNPCs = true`, all `fieldNPCs.* = true`, `guaranteeZagContract = false`, `guaranteeChronosClearing = false`.
-- **Only Nemesis and Artemis:** `guaranteeFieldNPCs = true`, enable only those two under `fieldNPCs`, disable the rest.
-- **Random biomes each run:** `randomizeFieldNPCBiome = true` with field NPCs enabled; enable `debugLog` to see assigned biomes in the console.
-- **Chronos only:** `guaranteeFieldNPCs = false`, `guaranteeChronosClearing = true` (requires True Ending on your save).
+- **All field NPCs, no postgame:** `enabled = true`, all `fieldNPCs.* = true`, `guaranteeZagContract = false`, `guaranteeChronosClearing = false`.
+- **Only Nemesis and Artemis:** enable only those two under `fieldNPCs`, disable the rest.
+- **Random biomes each run:** `randomizeFieldNPCBiome = true` with the NPCs you want enabled; use `debugLog` to see assigned biomes in the console.
+- **Chronos only (no field NPCs):** all `fieldNPCs.* = false`, `guaranteeChronosClearing = true` (requires True Ending on your save).
 - **Disable everything temporarily:** `enabled = false`.
 
 ## Contributing

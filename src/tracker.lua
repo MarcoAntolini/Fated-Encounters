@@ -8,24 +8,18 @@ local FIELD_NPCS = { "Nemesis", "Artemis", "Heracles", "Icarus", "Athena" }
 ---@param npc string
 ---@return boolean
 function tracker.IsFieldNPCEnabled(npc)
-	if not config.guaranteeFieldNPCs then
-		return false
-	end
 	local perNpc = config.fieldNPCs
 	if perNpc == nil then
-		return true
+		return false
 	end
 	local enabled = perNpc[npc]
 	if enabled == nil then
-		return true
+		return false
 	end
 	return enabled == true
 end
 
 function tracker.HasAnyFieldNPCEnabled()
-	if not config.guaranteeFieldNPCs then
-		return false
-	end
 	for _, npc in ipairs(FIELD_NPCS) do
 		if tracker.IsFieldNPCEnabled(npc) then
 			return true

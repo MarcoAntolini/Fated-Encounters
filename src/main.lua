@@ -36,6 +36,9 @@ reload = mods['SGG_Modding-ReLoad']
 ---@module 'config'
 config = chalk.auto 'config.lua'
 -- ^ syncs defaults + descriptions from config.lua into `<guid>.cfg` for r2modman
+---@module 'config_migrate'
+config_migrate = import 'config_migrate.lua'
+config_migrate.Apply(config)
 public.config = config -- so other mods can access our config
 
 local function on_ready()
