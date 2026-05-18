@@ -1,0 +1,100 @@
+name: Bug report
+description: Something is broken or not working as documented
+title: "[Bug]: "
+labels:
+  - bug
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting a bug. Please fill in what you can so we can reproduce it.
+
+  - type: input
+    id: mod-version
+    attributes:
+      label: Fated Encounters version
+      description: Thunderstore version or git commit (e.g. `0.2.0`)
+      placeholder: "0.2.0"
+    validations:
+      required: true
+
+  - type: input
+    id: game-version
+    attributes:
+      label: Hades II game version
+      description: Steam build / update date if known
+      placeholder: "e.g. latest Steam build, May 2026"
+    validations:
+      required: false
+
+  - type: dropdown
+    id: install-method
+    attributes:
+      label: How did you install the mod?
+      options:
+        - r2modman
+        - Thunderstore App
+        - Manual / other
+    validations:
+      required: true
+
+  - type: textarea
+    id: mod-list
+    attributes:
+      label: Other mods enabled
+      description: List mods that might conflict (especially other encounter or NPC mods)
+      placeholder: Hell2Modding, Chalk, …
+    validations:
+      required: false
+
+  - type: textarea
+    id: config
+    attributes:
+      label: Relevant config
+      description: Your settings from r2modman Config or `MarcoAntolini-Fated-Encounters.cfg` (paste or summarize)
+      render: shell
+    validations:
+      required: false
+
+  - type: textarea
+    id: save-context
+    attributes:
+      label: Save / run context
+      description: e.g. True Ending reached, dream run, which biomes visited, which NPC failed to appear
+    validations:
+      required: false
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: What you did from starting a run (or loading) until the problem happened
+      placeholder: |
+        1. Enable only Nemesis in config
+        2. Start a run and enter biome F
+        3. …
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: What actually happened
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Console / debug output
+      description: If `debugLog` was enabled, paste `[FatedEncounters]` lines or other errors from the game console
+      render: shell
+    validations:
+      required: false

@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Hades II Modding Discord
+    url: https://discord.gg/KuMbyrN
+    about: General Hell2Modding help, mod lists, and community support
+  - name: Thunderstore package page
+    url: https://thunderstore.io/c/hades-ii/p/MarcoAntolini/Fated-Encounters/
+    about: Install links and package dependencies

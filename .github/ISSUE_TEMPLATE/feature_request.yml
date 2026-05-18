@@ -1,0 +1,48 @@
+name: Feature request
+description: Suggest a new option or behavior change
+title: "[Feature]: "
+labels:
+  - enhancement
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Describe what you want and why. Config toggles and per-NPC behavior are common requests—be specific.
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem or motivation
+      description: What limitation are you hitting with the mod or vanilla game?
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: Proposed solution
+      description: How should the mod behave? Include config ideas if relevant (`fieldNPCs`, `randomizeFieldNPCBiome`, etc.)
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: Other ways to solve it, or workarounds you tried
+    validations:
+      required: false
+
+  - type: dropdown
+    id: scope
+    attributes:
+      label: Which part of the mod?
+      options:
+        - Field NPC guarantees
+        - Zagreus / Infernal Contract
+        - Chronos / Neo-Chronos
+        - Config / r2modman
+        - Documentation
+        - Other
+    validations:
+      required: false

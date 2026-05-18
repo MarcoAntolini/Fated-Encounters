@@ -9,12 +9,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Per-NPC toggles under `fieldNPCs` (Nemesis, Artemis, Heracles, Icarus, Athena), with `guaranteeFieldNPCs` as a master switch for field guarantees.
-- `randomizeFieldNPCBiome`: assign each field NPC a random eligible biome at run start instead of the first biome you visit.
-- Chalk descriptions for all config options (shown in r2modman’s config editor).
-- README configuration section: options table, examples, and how to edit via r2modman or `.cfg`.
+- Contributing guide, README contributing section, and GitHub issue/PR templates.
+
+## [0.2.0] - 2026-05-18
+
+### Added
+
+- Field NPC encounter guarantees (Nemesis, Artemis, Heracles, Icarus, Athena): once per run, forced in an eligible biome after you enter it.
+- Postgame guarantees after True Ending: Zagreus Infernal Contract (when unlocked) and Neo-Chronos clearing.
+- Per-NPC toggles under `fieldNPCs`, with `guaranteeFieldNPCs` as a master switch.
+- `randomizeFieldNPCBiome`: assign each enabled field NPC a random eligible biome at run start instead of the first biome you visit.
+- Chalk-backed config with descriptions for r2modman’s config editor.
+- README: configuration guide, options table, and examples.
 
 ### Changed
 
-- Config and README wording clarified: field NPCs are guaranteed **once per run**, not once per biome.
-- Config schema version bumped to `3` (Chalk merges new keys into existing user configs).
+- Thunderstore description and README clarify **once per run** behavior (not once per biome).
+- Config schema version `3` (Chalk merges new keys into existing user `.cfg` files).
