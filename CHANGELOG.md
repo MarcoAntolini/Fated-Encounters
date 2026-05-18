@@ -9,4 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- First version of the mod!
+- Per-NPC toggles under `fieldNPCs` (Nemesis, Artemis, Heracles, Icarus, Athena), with `guaranteeFieldNPCs` as a master switch for field guarantees.
+- Chalk descriptions for all config options (shown in r2modman’s config editor).
+- README configuration section: options table, examples, and how to edit via r2modman or `.cfg`.
+
+### Changed
+
+- Config schema version bumped to `2` (Chalk merges new keys into existing user configs).
