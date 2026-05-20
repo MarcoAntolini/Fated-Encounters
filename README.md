@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="./images/icon.png" alt="Fated Encounters mod icon" min-width="256" min-height="256" />
+  <img src="./images/banner.png" alt="Fated Encounters mod icon" min-width="256" min-height="256" />
 </p>
 
 # Fated Encounters
