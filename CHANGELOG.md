@@ -2,6 +2,16 @@
 
 ## [Unreleased]
 
+### Fixed
+
+- GitHub release notes were empty when `CHANGELOG.md` had a duplicate version heading before the section with content.
+
+### Changed
+
+- Release workflow no longer runs ChangeLogger; cut `CHANGELOG.md` and bump `thunderstore.toml` locally before dispatch (see CONTRIBUTING).
+- Release workflow skips the bot commit when `CHANGELOG.md` and `thunderstore.toml` are already updated for the tag.
+- Changelog compare links added for `0.3.0` and `0.2.0`.
+
 ## [0.3.1] - 2026-05-20
 
 ### Fixed
