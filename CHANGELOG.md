@@ -4,6 +4,8 @@
 
 ## [0.3.1] - 2026-05-20
 
+## [0.3.1] - 2026-05-20
+
 ### Fixed
 
 - Thunderstore package icon must be 256×256; optimized root `icon.png`.
@@ -49,3 +51,6 @@
 
 - Thunderstore description and README clarify **once per run** behavior (not once per biome).
 - Config schema version `3` (Chalk merges new keys into existing user `.cfg` files).
+
+[unreleased]: https://github.com/MarcoAntolini/Fated-Encounters/compare/0.3.1...HEAD
+[0.3.1]: https://github.com/MarcoAntolini/Fated-Encounters/compare/d5bbaa167f637392114433bc6c0dd3888f3aae8e...0.3.1
