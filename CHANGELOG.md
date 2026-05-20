@@ -4,8 +4,6 @@
 
 ## [0.3.1] - 2026-05-20
 
-## [0.3.1] - 2026-05-20
-
 ### Fixed
 
 - Thunderstore package icon must be 256×256; optimized root `icon.png`.
@@ -54,3 +52,5 @@
 
 [unreleased]: https://github.com/MarcoAntolini/Fated-Encounters/compare/0.3.1...HEAD
 [0.3.1]: https://github.com/MarcoAntolini/Fated-Encounters/compare/d5bbaa167f637392114433bc6c0dd3888f3aae8e...0.3.1
+[0.3.0]: https://github.com/MarcoAntolini/Fated-Encounters/compare/d2725e2...0.3.0
+[0.2.0]: https://github.com/MarcoAntolini/Fated-Encounters/compare/817f31c6c1798f388aa4e5bb83944e0d4a0464dc...d2725e2

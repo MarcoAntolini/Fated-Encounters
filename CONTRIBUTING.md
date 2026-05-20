@@ -47,7 +47,7 @@ Maintainers may request changes or handle versioning and Thunderstore releases.
 
 ## Releases (maintainers)
 
-Releases use the GitHub Actions **Release** workflow with a semver tag (e.g. `0.3.1`). That updates `thunderstore.toml`, builds the package, and publishes to [Thunderstore](https://thunderstore.io/c/hades-ii/p/MarcoAntolini/FatedEncounters/). The matching `CHANGELOG.md` section becomes the GitHub release notes. README images under `./images/` are rewritten to GitHub raw URLs during the workflow—keep `images/icon.png` in sync with root `icon.png`.
+Before running the GitHub Actions **Release** workflow, cut the release locally (versioned `CHANGELOG.md` section, empty `## [Unreleased]`, and `versionNumber` in `thunderstore.toml` bumped to the tag). The workflow builds and publishes to [Thunderstore](https://thunderstore.io/c/hades-ii/p/MarcoAntolini/FatedEncounters/), tags the repo, and uses the matching `CHANGELOG.md` section for GitHub release notes. README images under `./images/` are rewritten to GitHub raw URLs during the build only—keep `images/icon.png` in sync with root `icon.png`.
 
 ## Questions
 
