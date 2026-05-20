@@ -5,7 +5,7 @@ schemaVersion = "0.0.1"
 [package]
 namespace = "MarcoAntolini"
 name = "FatedEncounters"
-versionNumber = "0.3.0"
+versionNumber = "0.3.1"
 description = "Guarantee field NPC and postgame encounters once per run. Per-NPC toggles and optional random biome assignment; configurable in r2modman."
 websiteUrl = "https://github.com/MarcoAntolini/Fated-Encounters"
 containsNsfwContent = false

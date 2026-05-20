@@ -2,6 +2,19 @@
 
 ## [Unreleased]
 
+## [0.3.1] - 2026-05-20
+
+### Fixed
+
+- Thunderstore package icon must be 256×256; optimized root `icon.png`.
+- Thunderstore README banner did not load (markdown image for release URL rewrite; `images/` kept out of Git LFS for GitHub raw hotlinking).
+
+### Changed
+
+- README header uses `images/banner.png` (512×512); release workflow also rewrites HTML `img src` paths.
+- Thunderstore package page links added across README, CONTRIBUTING, and GitHub issue templates.
+- GitHub Release workflow populates release notes from the matching `CHANGELOG.md` section.
+
 ## [0.3.0] - 2026-05-20
 
 ## [0.3.0] - 2026-05-20
