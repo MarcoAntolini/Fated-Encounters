@@ -90,6 +90,28 @@ jobs:
           git tag ${{ inputs.tag }} --annotate --message "Release ${{ inputs.tag }}"
           git push origin HEAD:${{ github.ref_name }} --tags
 
+      - name: Extract release notes from changelog
+        if: ${{ !inputs.is-dry-run }}
+        env:
+          TAG: ${{ inputs.tag }}
+          CHANGELOG: ${{ env.changelog }}
+        run: |
+          python3 <<'EOF'
+          import os, re, sys
+
+          tag = os.environ["TAG"]
+          path = os.environ["CHANGELOG"]
+          text = open(path, encoding="utf-8").read()
+          match = re.search(rf"^## \[{re.escape(tag)}\].*?(?=^## \[|\Z)", text, re.M | re.S)
+          if not match:
+              print(f"::error title=Missing changelog section::No section for {tag} in {path}", file=sys.stderr)
+              sys.exit(1)
+
+          notes = match.group(0).rstrip()
+          notes += "\n\n**Install:** [Thunderstore](https://thunderstore.io/c/hades-ii/p/MarcoAntolini/FatedEncounters/)\n"
+          open("release-notes.md", "w", encoding="utf-8").write(notes)
+          EOF
+
       - name: Create release and upload artifact
         if: ${{ !inputs.is-dry-run }}
         run: |
@@ -97,6 +119,7 @@ jobs:
             '${{ inputs.tag }}' \
             '${{ env.artifact-path }}' \
             --title '${{ inputs.tag }}' \
+            --notes-file release-notes.md \
             --repo '${{ github.repository }}' \
             --target '${{ github.ref_name }}' \
             --verify-tag
