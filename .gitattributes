@@ -7,5 +7,6 @@
 .gitignore export-ignore
 .gitmodules export-ignore
 
-# Git LFS
+# Git LFS (README assets under images/ stay in git for GitHub raw hotlinking)
 *.png filter=lfs diff=lfs merge=lfs -text
+images/** -filter -diff -merge
