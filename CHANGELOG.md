@@ -17,8 +17,6 @@
 
 ## [0.3.0] - 2026-05-20
 
-## [0.3.0] - 2026-05-20
-
 ### Added
 
 - `config_migrate.lua` to upgrade existing user configs when the config schema version changes.
