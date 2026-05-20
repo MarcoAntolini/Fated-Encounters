@@ -17,7 +17,7 @@ Thanks for helping improve the mod. This guide covers local setup, change expect
 
    ```powershell
    New-Item -ItemType SymbolicLink `
-     -Path "$env:APPDATA\r2modmanPlus-local\HadesII\profiles\Default\ReturnOfModding\plugins\MarcoAntolini-Fated-Encounters" `
+     -Path "$env:APPDATA\r2modmanPlus-local\HadesII\profiles\Default\ReturnOfModding\plugins\MarcoAntolini-FatedEncounters" `
      -Target "C:\path\to\Fated-Encounters\src"
    ```
 

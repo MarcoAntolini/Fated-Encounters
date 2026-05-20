@@ -6,7 +6,7 @@
 
 A Hades II mod that guarantees NPC encounters you would normally miss on a run—field combats (Nemesis, Artemis, Heracles, Icarus, Athena) and, after True Ending, Zagreus’s Infernal Contract and the Neo-Chronos clearing.
 
-Install with [r2modman](https://thunderstore.io/c/hades-ii/p/ebkr/r2modman/) or [Thunderstore](https://thunderstore.io/c/hades-ii/p/MarcoAntolini/Fated-Encounters/). Requires [Hell2Modding](https://thunderstore.io/c/hades-ii/p/Hell2Modding/Hell2Modding/) and the dependencies listed on the package page.
+Install with [r2modman](https://thunderstore.io/c/hades-ii/p/ebkr/r2modman/) or [Thunderstore](https://thunderstore.io/c/hades-ii/p/MarcoAntolini/FatedEncounters/). Requires [Hell2Modding](https://thunderstore.io/c/hades-ii/p/Hell2Modding/Hell2Modding/) and the dependencies listed on the package page.
 
 ## How it works
 
@@ -18,9 +18,9 @@ Install with [r2modman](https://thunderstore.io/c/hades-ii/p/ebkr/r2modman/) or 
 
 ## Configuration
 
-Settings are managed with [Chalk](https://thunderstore.io/c/hades-ii/p/SGG_Modding/Chalk/) and appear in **r2modman → Config** (or in your profile’s `ReturnOfModding/config/` as `MarcoAntolini-Fated-Encounters.cfg`).
+Settings are managed with [Chalk](https://thunderstore.io/c/hades-ii/p/SGG_Modding/Chalk/) and appear in **r2modman → Config** (or in your profile’s `ReturnOfModding/config/` as `MarcoAntolini-FatedEncounters.cfg`).
 
-**Note:** Config files persist even if you uninstall the mod. Delete or reset `MarcoAntolini-Fated-Encounters.cfg` manually for a clean slate.
+**Note:** Config files persist even if you uninstall the mod. Delete or reset `MarcoAntolini-FatedEncounters.cfg` manually for a clean slate.
 
 ### Options
 
@@ -35,9 +35,7 @@ Settings are managed with [Chalk](https://thunderstore.io/c/hades-ii/p/SGG_Moddi
 | `randomizeFieldNPCBiome` | bool | `false` | At run start, assign each enabled field NPC a random eligible biome (only forced there). When `false`, use the first eligible biome you enter. |
 | `guaranteeZagContract` | bool | `true` | After True Ending: guarantee Zagreus Infernal Contract once per run when unlocked for that run. |
 | `guaranteeChronosClearing` | bool | `true` | After True Ending: guarantee Neo-Chronos clearing once per run. |
-| `debugLog` | bool | `false` | Print `[FatedEncounters]` messages to the game console. |
-
-Internal key `version` (default `4`) is used by Chalk to merge new options into existing configs; you normally do not need to change it.
+| `debugLog` | bool | `false` | Print `[FatedEncounters]` messages to the game console (useful when reporting bugs). |
 
 ### Examples
 
@@ -46,6 +44,26 @@ Internal key `version` (default `4`) is used by Chalk to merge new options into 
 - **Random biomes each run:** `randomizeFieldNPCBiome = true` with the NPCs you want enabled; use `debugLog` to see assigned biomes in the console.
 - **Chronos only (no field NPCs):** all `fieldNPCs.* = false`, `guaranteeChronosClearing = true` (requires True Ending on your save).
 - **Disable everything temporarily:** `enabled = false`.
+
+## Troubleshooting
+
+### `Bad folder name ... Should be AuthorName-ModName`
+
+Hell2Modding expects **exactly one hyphen** in the plugin folder name: **`MarcoAntolini-FatedEncounters`** (`namespace` + `-` + `name` from the Thunderstore package).
+
+Common wrong names from older installs or r2modman quirks:
+
+- `MarcoAntolini-Fated-Encounters` — extra hyphen in the package name (pre-0.3.0 builds)
+- `Marco Antolini-FatedEncounters` — space in the Thunderstore team display name
+
+The mod may still load with a truncated id, but you should fix the folder name:
+
+1. Close the game and r2modman.
+2. Rename the plugin folder under `ReturnOfModding/plugins/` to **`MarcoAntolini-FatedEncounters`**.
+3. In the same profile’s `mods.yml`, set `name: MarcoAntolini-FatedEncounters` if present.
+4. If you had an old config file, rename `MarcoAntolini-Fated-Encounters.cfg` → `MarcoAntolini-FatedEncounters.cfg` under `ReturnOfModding/config/`.
+
+To avoid bad folder names on fresh installs, set your Thunderstore **team display name** to `MarcoAntolini` (no space), matching the package namespace.
 
 ## Contributing
 

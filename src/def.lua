@@ -1,4 +1,4 @@
----@meta MarcoAntolini-Fated-Encounters
+---@meta MarcoAntolini-FatedEncounters
 
 ---@alias FatedNPC "Nemesis" | "Artemis" | "Heracles" | "Icarus" | "Athena"
 
@@ -20,10 +20,10 @@
 ---@field guaranteeChronosClearing boolean After True Ending: guarantee Neo-Chronos clearing once per run.
 ---@field debugLog boolean Log debug lines to the console.
 
----@class MarcoAntolini-Fated-Encounters.Public
+---@class MarcoAntolini-FatedEncounters.Public
 ---@field config FatedEncountersConfig Set in main.lua via chalk.auto.
 
----@type MarcoAntolini-Fated-Encounters.Public
+---@type MarcoAntolini-FatedEncounters.Public
 local public = {}
 
 --[[
@@ -35,7 +35,7 @@ local public = {}
   - mod.Zagreus — Infernal Contract guarantee
   - mod.Chronos — Neo-Chronos clearing guarantee
 
-  Access from another plugin: local fe = rom.mods['MarcoAntolini-Fated-Encounters']
+  Access from another plugin: local fe = rom.mods['MarcoAntolini-FatedEncounters']
 ]]
 
 return public

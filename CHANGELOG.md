@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+## [0.3.0] - 2026-05-20
+
 ### Added
 
 - `config_migrate.lua` to upgrade existing user configs when the config schema version changes.
@@ -9,9 +11,15 @@
 
 ### Changed
 
+- Thunderstore package name is now `FatedEncounters` (plugin folder `MarcoAntolini-FatedEncounters`); docs and templates updated from the old hyphenated slug.
+- Internal config `version` is no longer described in r2modman; it is still updated automatically for migrations.
 - Removed `guaranteeFieldNPCs` master switch; `fieldNPCs.*` toggles are now the only control for field NPC guarantees.
 - Config schema version bumped to `4`; migrating from v3 disables all `fieldNPCs.*` if `guaranteeFieldNPCs` was false (preserves Chronos-only setups).
-- README configuration table and examples updated for per-NPC field toggles.
+- README configuration table, examples, and troubleshooting for correct plugin folder naming.
+
+### Fixed
+
+- `StartNewRun` wrapper now returns the run table from vanilla code. Without this, starting a run from the hub crashed with `attempt to index local 'currentRun' (a nil value)` in `DeathLoopLogic.lua`.
 
 ## [0.2.0] - 2026-05-18
 

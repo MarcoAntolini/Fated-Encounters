@@ -179,10 +179,11 @@ function tracker.OnEncounterRecorded(run, encounter)
 end
 
 function tracker.WrapStartNewRun(base, prevRun, args)
-	base(prevRun, args)
+	local run = base(prevRun, args)
 	if tracker.ShouldInitRun() and game.CurrentRun ~= nil then
 		tracker.InitRun(game.CurrentRun)
 	end
+	return run
 end
 
 function tracker.WrapStartRoom(base, currentRun, currentRoom)

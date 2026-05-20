@@ -51,7 +51,7 @@ body:
     id: config
     attributes:
       label: Relevant config
-      description: Your settings from r2modman Config or `MarcoAntolini-Fated-Encounters.cfg` (paste or summarize)
+      description: Your settings from r2modman Config or `MarcoAntolini-FatedEncounters.cfg` (paste or summarize)
       render: shell
     validations:
       required: false

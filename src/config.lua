@@ -15,7 +15,6 @@ local default = {
 }
 
 local descript = {
-	version = "Config schema version (used when new options are added).";
 	enabled = "Enable or disable the entire mod.";
 	fieldNPCs = {
 		Nemesis = "Guarantee you meet Nemesis once this run (first eligible biome you visit, or a random one if randomizeFieldNPCBiome is on).";
