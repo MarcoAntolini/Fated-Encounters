@@ -9,12 +9,14 @@ body:
       value: |
         Thanks for reporting a bug. Please fill in what you can so we can reproduce it.
 
+        Install the latest from [Thunderstore](https://thunderstore.io/c/hades-ii/p/MarcoAntolini/FatedEncounters/).
+
   - type: input
     id: mod-version
     attributes:
       label: Fated Encounters version
-      description: Thunderstore version or git commit (e.g. `0.2.0`)
-      placeholder: "0.2.0"
+      description: Thunderstore version from the [package page](https://thunderstore.io/c/hades-ii/p/MarcoAntolini/FatedEncounters/) or git commit (e.g. `0.3.0`)
+      placeholder: "0.3.0"
     validations:
       required: true
 

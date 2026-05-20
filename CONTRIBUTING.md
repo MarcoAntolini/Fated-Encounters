@@ -5,13 +5,14 @@ Thanks for helping improve the mod. This guide covers local setup, change expect
 ## Before you start
 
 - Read the [README](README.md) so you understand once-per-run guarantees and config options.
+- Install or update from [Thunderstore](https://thunderstore.io/c/hades-ii/p/MarcoAntolini/FatedEncounters/) (r2modman or Thunderstore App).
 - Join the [Hades II Modding Discord](https://discord.gg/KuMbyrN) for general Hell2Modding help (not required for GitHub contributions).
 - Use [GitHub Issues](https://github.com/MarcoAntolini/Fated-Encounters/issues) for bugs and feature requests (templates provided).
 - For small typos or docs-only fixes, a PR without a prior issue is fine.
 
 ## Development setup
 
-1. **Requirements:** A legal copy of Hades II, [Hell2Modding](https://thunderstore.io/c/hades-ii/p/Hell2Modding/Hell2Modding/) (via r2modman is easiest), and this mod’s Thunderstore dependencies (see `thunderstore.toml`).
+1. **Requirements:** A legal copy of Hades II, [Hell2Modding](https://thunderstore.io/c/hades-ii/p/Hell2Modding/Hell2Modding/) (via r2modman is easiest), and [Fated Encounters](https://thunderstore.io/c/hades-ii/p/MarcoAntolini/FatedEncounters/) with its dependencies (see `thunderstore.toml`).
 2. **Clone** this repository and open it in your editor (VS Code + [Lua](https://marketplace.visualstudio.com/items?itemName=sumneko.lua) extension recommended).
 3. **Symlink for live reload** — link this repo’s `src` folder into your r2modman profile so edits apply without rebuilding the package every time:
 
@@ -46,7 +47,7 @@ Maintainers may request changes or handle versioning and Thunderstore releases.
 
 ## Releases (maintainers)
 
-Releases use the GitHub Actions **Release** workflow with a semver tag (e.g. `0.2.1`). That updates `thunderstore.toml`, builds the package, and publishes to Thunderstore. README images under `./images/` are rewritten to GitHub raw URLs during the workflow—keep `images/icon.png` in sync with root `icon.png`.
+Releases use the GitHub Actions **Release** workflow with a semver tag (e.g. `0.3.1`). That updates `thunderstore.toml`, builds the package, and publishes to [Thunderstore](https://thunderstore.io/c/hades-ii/p/MarcoAntolini/FatedEncounters/). README images under `./images/` are rewritten to GitHub raw URLs during the workflow—keep `images/icon.png` in sync with root `icon.png`.
 
 ## Questions
 

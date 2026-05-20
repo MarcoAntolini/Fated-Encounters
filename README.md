@@ -6,9 +6,11 @@
 
 # Fated Encounters
 
+**[Thunderstore](https://thunderstore.io/c/hades-ii/p/MarcoAntolini/FatedEncounters/)** · [Report a bug](https://github.com/MarcoAntolini/Fated-Encounters/issues/new?template=bug_report.yml) · [Request a feature](https://github.com/MarcoAntolini/Fated-Encounters/issues/new?template=feature_request.yml)
+
 A Hades II mod that guarantees NPC encounters you would normally miss on a run—field combats (Nemesis, Artemis, Heracles, Icarus, Athena) and, after True Ending, Zagreus’s Infernal Contract and the Neo-Chronos clearing.
 
-Install with [r2modman](https://thunderstore.io/c/hades-ii/p/ebkr/r2modman/) or [Thunderstore](https://thunderstore.io/c/hades-ii/p/MarcoAntolini/FatedEncounters/). Requires [Hell2Modding](https://thunderstore.io/c/hades-ii/p/Hell2Modding/Hell2Modding/) and the dependencies listed on the package page.
+Install with [r2modman](https://thunderstore.io/c/hades-ii/p/ebkr/r2modman/) or [Thunderstore](https://thunderstore.io/c/hades-ii/p/MarcoAntolini/FatedEncounters/). Requires [Hell2Modding](https://thunderstore.io/c/hades-ii/p/Hell2Modding/Hell2Modding/) and the dependencies listed on the [package page](https://thunderstore.io/c/hades-ii/p/MarcoAntolini/FatedEncounters/).
 
 ## How it works
 
@@ -51,7 +53,7 @@ Settings are managed with [Chalk](https://thunderstore.io/c/hades-ii/p/SGG_Moddi
 
 ### `Bad folder name ... Should be AuthorName-ModName`
 
-Hell2Modding expects **exactly one hyphen** in the plugin folder name: **`MarcoAntolini-FatedEncounters`** (`namespace` + `-` + `name` from the Thunderstore package).
+Hell2Modding expects **exactly one hyphen** in the plugin folder name: **`MarcoAntolini-FatedEncounters`** (`namespace` + `-` + `name` from the [Thunderstore package](https://thunderstore.io/c/hades-ii/p/MarcoAntolini/FatedEncounters/)).
 
 Common wrong names from older installs or r2modman quirks:
 
@@ -71,6 +73,7 @@ To avoid bad folder names on fresh installs, set your Thunderstore **team displa
 
 Contributions are welcome—bug reports, feature ideas, docs, and code.
 
+- **[Thunderstore page](https://thunderstore.io/c/hades-ii/p/MarcoAntolini/FatedEncounters/)** — install, versions, and dependencies.
 - **[Contributing guide](CONTRIBUTING.md)** — dev setup (r2modman symlink), change expectations, and releases.
 - **[Report a bug](https://github.com/MarcoAntolini/Fated-Encounters/issues/new?template=bug_report.yml)** — use the template so we can reproduce issues.
 - **[Request a feature](https://github.com/MarcoAntolini/Fated-Encounters/issues/new?template=feature_request.yml)** — describe behavior and config ideas.
