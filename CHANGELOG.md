@@ -4,6 +4,8 @@
 
 ## [0.3.0] - 2026-05-20
 
+## [0.3.0] - 2026-05-20
+
 ### Added
 
 - `config_migrate.lua` to upgrade existing user configs when the config schema version changes.
@@ -36,3 +38,6 @@
 
 - Thunderstore description and README clarify **once per run** behavior (not once per biome).
 - Config schema version `3` (Chalk merges new keys into existing user `.cfg` files).
+
+[unreleased]: https://github.com/MarcoAntolini/Fated-Encounters/compare/0.3.0...HEAD
+[0.3.0]: https://github.com/MarcoAntolini/Fated-Encounters/compare/e3106ae289d717e1464d57c00987c6eede78e205...0.3.0
