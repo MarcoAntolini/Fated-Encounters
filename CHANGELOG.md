@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+## [0.3.2] - 2026-05-20
+
 ### Fixed
 
 - GitHub release notes were empty when `CHANGELOG.md` had a duplicate version heading before the section with content.
@@ -11,6 +13,7 @@
 - Release workflow no longer runs ChangeLogger; cut `CHANGELOG.md` and bump `thunderstore.toml` locally before dispatch (see CONTRIBUTING).
 - Release workflow skips the bot commit when `CHANGELOG.md` and `thunderstore.toml` are already updated for the tag.
 - Changelog compare links added for `0.3.0` and `0.2.0`.
+- README: removed troubleshooting for legacy plugin folder names (superseded by the `FatedEncounters` package rename in 0.3.0).
 
 ## [0.3.1] - 2026-05-20
 
@@ -60,7 +63,8 @@
 - Thunderstore description and README clarify **once per run** behavior (not once per biome).
 - Config schema version `3` (Chalk merges new keys into existing user `.cfg` files).
 
-[unreleased]: https://github.com/MarcoAntolini/Fated-Encounters/compare/0.3.1...HEAD
+[unreleased]: https://github.com/MarcoAntolini/Fated-Encounters/compare/0.3.2...HEAD
+[0.3.2]: https://github.com/MarcoAntolini/Fated-Encounters/compare/0.3.1...0.3.2
 [0.3.1]: https://github.com/MarcoAntolini/Fated-Encounters/compare/d5bbaa167f637392114433bc6c0dd3888f3aae8e...0.3.1
 [0.3.0]: https://github.com/MarcoAntolini/Fated-Encounters/compare/d2725e2...0.3.0
 [0.2.0]: https://github.com/MarcoAntolini/Fated-Encounters/compare/817f31c6c1798f388aa4e5bb83944e0d4a0464dc...d2725e2

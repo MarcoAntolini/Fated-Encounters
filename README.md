@@ -49,26 +49,6 @@ Settings are managed with [Chalk](https://thunderstore.io/c/hades-ii/p/SGG_Moddi
 - **Chronos only (no field NPCs):** all `fieldNPCs.* = false`, `guaranteeChronosClearing = true` (requires True Ending on your save).
 - **Disable everything temporarily:** `enabled = false`.
 
-## Troubleshooting
-
-### `Bad folder name ... Should be AuthorName-ModName`
-
-Hell2Modding expects **exactly one hyphen** in the plugin folder name: **`MarcoAntolini-FatedEncounters`** (`namespace` + `-` + `name` from the [Thunderstore package](https://thunderstore.io/c/hades-ii/p/MarcoAntolini/FatedEncounters/)).
-
-Common wrong names from older installs or r2modman quirks:
-
-- `MarcoAntolini-Fated-Encounters` — extra hyphen in the package name (pre-0.3.0 builds)
-- `Marco Antolini-FatedEncounters` — space in the Thunderstore team display name
-
-The mod may still load with a truncated id, but you should fix the folder name:
-
-1. Close the game and r2modman.
-2. Rename the plugin folder under `ReturnOfModding/plugins/` to **`MarcoAntolini-FatedEncounters`**.
-3. In the same profile’s `mods.yml`, set `name: MarcoAntolini-FatedEncounters` if present.
-4. If you had an old config file, rename `MarcoAntolini-Fated-Encounters.cfg` → `MarcoAntolini-FatedEncounters.cfg` under `ReturnOfModding/config/`.
-
-To avoid bad folder names on fresh installs, set your Thunderstore **team display name** to `MarcoAntolini` (no space), matching the package namespace.
-
 ## Contributing
 
 Contributions are welcome—bug reports, feature ideas, docs, and code.
