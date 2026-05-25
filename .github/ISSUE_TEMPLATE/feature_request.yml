@@ -23,7 +23,7 @@ body:
     id: solution
     attributes:
       label: Proposed solution
-      description: How should the mod behave? Include config ideas if relevant (`fieldNPCs`, `randomizeFieldNPCBiome`, etc.)
+      description: How should the mod behave? Include config ideas if relevant (ally toggles, region shuffle, etc.)
     validations:
       required: true
 
@@ -40,9 +40,9 @@ body:
     attributes:
       label: Which part of the mod?
       options:
-        - Field NPC guarantees
+        - Ally encounters (Nemesis, Artemis, Heracles, Icarus, Athena)
         - Zagreus / Infernal Contract
-        - Chronos / Neo-Chronos
+        - Chronos (Erebus–Oceanus hub)
         - Config / r2modman
         - Documentation
         - Other

@@ -2,6 +2,14 @@
 
 ## [Unreleased]
 
+## [0.3.3] - 2026-05-25
+
+### Changed
+
+- Thunderstore description, README, and r2modman config text use plain in-game language (regions, allies, True Ending) instead of internal terms like field NPC, biome, or clearing.
+- Chronos is documented as the reformed Chronos conversation in the hub between Erebus and Oceanus after True Ending—not the Asphodel send event.
+- GitHub issue and PR templates use the same plain-language terms.
+
 ## [0.3.2] - 2026-05-20
 
 ### Fixed
@@ -63,7 +71,8 @@
 - Thunderstore description and README clarify **once per run** behavior (not once per biome).
 - Config schema version `3` (Chalk merges new keys into existing user `.cfg` files).
 
-[unreleased]: https://github.com/MarcoAntolini/Fated-Encounters/compare/0.3.2...HEAD
+[unreleased]: https://github.com/MarcoAntolini/Fated-Encounters/compare/0.3.3...HEAD
+[0.3.3]: https://github.com/MarcoAntolini/Fated-Encounters/compare/0.3.2...0.3.3
 [0.3.2]: https://github.com/MarcoAntolini/Fated-Encounters/compare/0.3.1...0.3.2
 [0.3.1]: https://github.com/MarcoAntolini/Fated-Encounters/compare/d5bbaa167f637392114433bc6c0dd3888f3aae8e...0.3.1
 [0.3.0]: https://github.com/MarcoAntolini/Fated-Encounters/compare/d2725e2...0.3.0

@@ -19,7 +19,7 @@
 
 **Test details:**
 
-<!-- e.g. enabled only Artemis, visited biome F, confirmed one forced encounter -->
+<!-- e.g. enabled only Artemis, visited Erebus, confirmed one forced encounter -->
 
 ## Changelog
 

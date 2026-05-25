@@ -62,7 +62,7 @@ body:
     id: save-context
     attributes:
       label: Save / run context
-      description: e.g. True Ending reached, dream run, which biomes visited, which NPC failed to appear
+      description: e.g. True Ending reached, dream run, which regions you visited, which ally failed to appear
     validations:
       required: false
 
@@ -73,7 +73,7 @@ body:
       description: What you did from starting a run (or loading) until the problem happened
       placeholder: |
         1. Enable only Nemesis in config
-        2. Start a run and enter biome F
+        2. Start a run and enter Erebus
         3. …
     validations:
       required: true

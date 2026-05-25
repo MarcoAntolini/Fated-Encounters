@@ -17,15 +17,15 @@ local default = {
 local descript = {
 	enabled = "Enable or disable the entire mod.";
 	fieldNPCs = {
-		Nemesis = "Guarantee you meet Nemesis once this run (first eligible biome you visit, or a random one if randomizeFieldNPCBiome is on).";
-		Artemis = "Guarantee you meet Artemis once this run (first eligible biome you visit, or a random one if randomizeFieldNPCBiome is on).";
-		Heracles = "Guarantee you meet Heracles once this run (first eligible biome you visit, or a random one if randomizeFieldNPCBiome is on).";
-		Icarus = "Guarantee you meet Icarus once this run (first eligible biome you visit, or a random one if randomizeFieldNPCBiome is on).";
-		Athena = "Guarantee you meet Athena once this run (first eligible biome you visit, or a random one if randomizeFieldNPCBiome is on).";
+		Nemesis = "Guarantee you meet Nemesis in combat once this run (first eligible region you visit, or a random one if random region shuffle is on).";
+		Artemis = "Guarantee you meet Artemis in combat once this run (first eligible region you visit, or a random one if random region shuffle is on).";
+		Heracles = "Guarantee you meet Heracles in combat once this run (first eligible region you visit, or a random one if random region shuffle is on).";
+		Icarus = "Guarantee you meet Icarus in combat once this run (first eligible region you visit, or a random one if random region shuffle is on).";
+		Athena = "Guarantee you meet Athena in combat once this run (first eligible region you visit, or a random one if random region shuffle is on).";
 	};
-	randomizeFieldNPCBiome = "When on, each enabled field NPC is assigned one random eligible biome at run start and only forced there. When off, they appear in the first eligible biome you enter this run.";
-	guaranteeZagContract = "After True Ending: guarantee the Zagreus Infernal Contract once per run when it is unlocked.";
-	guaranteeChronosClearing = "After True Ending: guarantee the Neo-Chronos clearing encounter once per run.";
+	randomizeFieldNPCBiome = "When on, each enabled ally is assigned one random eligible region at run start and only appears there. When off, they appear in the first eligible region you enter this run.";
+	guaranteeZagContract = "After True Ending: guarantee Zagreus offers the Infernal Contract once per run when that content is unlocked.";
+	guaranteeChronosClearing = "After True Ending: guarantee Chronos appears for a conversation in the hub between Erebus and Oceanus once per run (not the Asphodel send event).";
 	debugLog = "Print debug messages to the game console (for troubleshooting).";
 }
 

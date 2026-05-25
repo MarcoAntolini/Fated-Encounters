@@ -5,8 +5,8 @@ schemaVersion = "0.0.1"
 [package]
 namespace = "MarcoAntolini"
 name = "FatedEncounters"
-versionNumber = "0.3.2"
-description = "Guarantee field NPC and postgame encounters once per run. Per-NPC toggles and optional random biome assignment; configurable in r2modman."
+versionNumber = "0.3.3"
+description = "Meet Nemesis, Artemis, Heracles, Icarus, and Athena once every run. After the True Ending, optionally guarantee Zagreus's Infernal Contract and Chronos at the hub between Erebus and Oceanus. Toggle each character and shuffle regions in r2modman."
 websiteUrl = "https://github.com/MarcoAntolini/Fated-Encounters"
 containsNsfwContent = false
 
