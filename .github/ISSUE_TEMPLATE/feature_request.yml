@@ -7,7 +7,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        Describe what you want and why. Config toggles and per-NPC behavior are common requests—be specific.
+        Describe what you want and why. Config toggles and per-ally behavior are common requests—be specific. The mod can be configured in-game (**Fated Encounters** settings) or in r2modman.
 
         Current mod page: [Thunderstore](https://thunderstore.io/c/hades-ii/p/MarcoAntolini/FatedEncounters/)
 
@@ -23,7 +23,7 @@ body:
     id: solution
     attributes:
       label: Proposed solution
-      description: How should the mod behave? Include config ideas if relevant (ally toggles, region shuffle, etc.)
+      description: How should the mod behave? Include setting ideas if relevant (ally toggles, region shuffle, Chaos Trials, Dream Dives, etc.)
     validations:
       required: true
 
@@ -43,7 +43,8 @@ body:
         - Ally encounters (Nemesis, Artemis, Heracles, Icarus, Athena)
         - Zagreus / Infernal Contract
         - Chronos (Erebus–Oceanus hub)
-        - Config / r2modman
+        - Chaos Trials or Dream Dives
+        - In-game settings / r2modman config
         - Documentation
         - Other
     validations:

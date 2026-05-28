@@ -1,5 +1,5 @@
 ---@meta _
--- Post-True Ending Neo-Chronos at the Erebus clearing (F_PostBoss01).
+-- Post–True Ending reformed Chronos in the Erebus–Oceanus hub (Story_Chronos_01 / NPC_Chronos_02).
 
 chronos = {}
 
@@ -9,6 +9,7 @@ function chronos.DebugLog(message)
 	end
 end
 
+--- Patch vanilla Story_Chronos_01 so SpawnChronosForTaunt always rolls when eligible.
 function chronos.PatchNeoChronosSpawnChance()
 	local encounter = game.EncounterData.Story_Chronos_01
 	if encounter == nil or encounter.StartRoomUnthreadedEvents == nil then
@@ -29,9 +30,14 @@ function chronos.PatchNeoChronosSpawnChance()
 	chronos.DebugLog("Neo-Chronos SpawnChronosForTaunt event not found")
 end
 
+--- Mark guarantee fulfilled when reformed Chronos spawns (NPC_Chronos_02).
+---@param base function
+---@param source table
+---@param args table|nil
 function chronos.WrapSpawnChronosForTaunt(base, source, args)
 	base(source, args)
-	if not config.guaranteeChronosClearing then
+	local postTE = config.postTrueEnding
+	if postTE == nil or not postTE.guaranteeChronosClearing then
 		return
 	end
 	if args == nil or args.UnitName ~= "NPC_Chronos_02" then
@@ -44,6 +50,7 @@ function chronos.WrapSpawnChronosForTaunt(base, source, args)
 	end
 end
 
+--- Patch encounter data and wrap SpawnChronosForTaunt.
 function chronos.RegisterHooks()
 	chronos.PatchNeoChronosSpawnChance()
 	modutil.mod.Path.Wrap("SpawnChronosForTaunt", chronos.WrapSpawnChronosForTaunt, mod)

@@ -1,2 +1,2 @@
 ---@meta _
--- Reload-safe hook bodies live in tracker.lua, guarantee.lua, zagreus.lua, and chronos.lua.
+-- Reload-safe import stub; hook bodies live in tracker, guarantee, zagreus, and chronos.

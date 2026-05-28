@@ -1,7 +1,8 @@
 ---@meta _
--- One-time setup (not reloaded on hot reload during gameplay).
+-- One-time setup: import feature modules and register game hooks (not re-run on hot reload).
 
 import 'encounters.lua'
+import 'run_modes.lua'
 import 'tracker.lua'
 import 'zagreus.lua'
 import 'chronos.lua'

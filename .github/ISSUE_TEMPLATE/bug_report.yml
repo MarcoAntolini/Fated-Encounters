@@ -53,7 +53,7 @@ body:
     id: config
     attributes:
       label: Relevant config
-      description: Your settings from r2modman Config or `MarcoAntolini-FatedEncounters.cfg` (paste or summarize)
+      description: Your settings from the in-game **Fated Encounters** window, r2modman Config, or `MarcoAntolini-FatedEncounters.cfg` (paste or summarize)
       render: shell
     validations:
       required: false
@@ -62,7 +62,7 @@ body:
     id: save-context
     attributes:
       label: Save / run context
-      description: e.g. True Ending reached, dream run, which regions you visited, which ally failed to appear
+      description: e.g. True Ending reached, Chaos Trial, Dream Dive, which regions you visited, which ally failed to appear
     validations:
       required: false
 

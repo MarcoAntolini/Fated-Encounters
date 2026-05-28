@@ -1,6 +1,5 @@
 ---@meta _
--- NPC encounter name tables and lookup helpers for Fated Encounters.
--- Names match vanilla EncounterData / EncounterSets (Hades II Content/Scripts).
+-- Ally encounter names, eligible regions, and eligibility helpers (vanilla EncounterData names).
 
 ---@alias FatedNPC "Nemesis" | "Artemis" | "Heracles" | "Icarus" | "Athena"
 ---@alias FatedBiome "F" | "G" | "H" | "I" | "N" | "O" | "P"
@@ -39,6 +38,11 @@ encounters.CooldownNamedRequirements = {
 	NoRecentFieldNPCEncounter = true,
 	NoRecentNemesisEncounter = true,
 	NoRecentHeraclesEncounter = true,
+}
+
+-- NamedRequirementsFalse stripped when forcing during Chaos Trials.
+encounters.ModeBypassNamedRequirementsFalse = {
+	StandardPackageBountyActive = true,
 }
 
 -- Unique encounter names per NPC per biome (combat + nemesis random events).
@@ -141,6 +145,101 @@ function encounters._requirementsBlockDreamRun(requirements)
 		end
 	end
 	return false
+end
+
+-- Depth-comparison fields used by ally encounters (BiomeDepthCache >= 3/4 etc.).
+-- Random Chaos Trial paths are too short to satisfy these naturally, so we strip them
+-- only when we've already committed to forcing a specific pending ally.
+encounters._depthRequirementFields = {
+	BiomeDepthCache = true,
+	BiomeEncounterDepth = true,
+	RunDepthCache = true,
+	BiomeDepth = true,
+	EncounterDepth = true,
+}
+
+---@param requirements table
+function encounters._stripChaosTrialBlockedRequirements(requirements)
+	local i = 1
+	while i <= #requirements do
+		local req = requirements[i]
+		if req.OrRequirements then
+			for _, orGroup in ipairs(req.OrRequirements) do
+				encounters._stripChaosTrialBlockedRequirements(orGroup)
+			end
+			i = i + 1
+		elseif req.PathFalse
+			and req.PathFalse[1] == "CurrentRun"
+			and type(req.PathFalse[2]) == "string"
+			and (req.PathFalse[2] == "ActiveBounty" or req.PathFalse[2]:find("Bounty") ~= nil) then
+			table.remove(requirements, i)
+		else
+			i = i + 1
+		end
+	end
+end
+
+---@param requirements table
+function encounters._stripChaosTrialDepthRequirements(requirements)
+	local i = 1
+	while i <= #requirements do
+		local req = requirements[i]
+		if req.OrRequirements then
+			for _, orGroup in ipairs(req.OrRequirements) do
+				encounters._stripChaosTrialDepthRequirements(orGroup)
+			end
+			i = i + 1
+		elseif req.Path
+			and req.Path[1] == "CurrentRun"
+			and type(req.Path[2]) == "string"
+			and encounters._depthRequirementFields[req.Path[2]]
+			and req.Comparison ~= nil then
+			table.remove(requirements, i)
+		else
+			i = i + 1
+		end
+	end
+end
+
+---@param encounterData table
+function encounters.ClearChaosTrialForceDepthGates(encounterData)
+	encounterData.MinDepth = nil
+	encounterData.MaxDepth = nil
+	encounterData.RequiredMinDepth = nil
+	encounterData.RequiredMaxDepth = nil
+	encounterData.MinimumDepth = nil
+	encounterData.MaximumDepth = nil
+	encounterData.RequiredMinBiomeDepth = nil
+	encounterData.RequiredMaxBiomeDepth = nil
+end
+
+---@param name string
+---@return boolean
+local function shouldStripChaosTrialNamedRequirementFalse(name)
+	if encounters.ModeBypassNamedRequirementsFalse[name] then
+		return true
+	end
+	return type(name) == "string" and (name:find("Bounty") ~= nil or name:find("Package") ~= nil)
+end
+
+---@param encounterData table
+function encounters.StripChaosTrialBlockedRequirements(encounterData)
+	if encounterData.GameStateRequirements == nil then
+		return
+	end
+	encounters._stripChaosTrialBlockedRequirements(encounterData.GameStateRequirements)
+	encounters._stripChaosTrialDepthRequirements(encounterData.GameStateRequirements)
+	for _, req in ipairs(encounterData.GameStateRequirements) do
+		if req.NamedRequirementsFalse ~= nil then
+			local filtered = {}
+			for _, name in ipairs(req.NamedRequirementsFalse) do
+				if not shouldStripChaosTrialNamedRequirementFalse(name) then
+					table.insert(filtered, name)
+				end
+			end
+			req.NamedRequirementsFalse = filtered
+		end
+	end
 end
 
 ---@param biome string

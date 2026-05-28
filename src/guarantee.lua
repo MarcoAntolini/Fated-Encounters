@@ -1,7 +1,10 @@
 ---@meta _
--- Force pending field NPC encounters via ChooseEncounter / IsEncounterEligible hooks.
+-- Ally encounter forcing via ChooseEncounter and IsEncounterEligible hooks.
 
 guarantee = {}
+
+--- Unwrapped game IsEncounterEligible (set in WrapIsEncounterEligible).
+guarantee._baseIsEncounterEligible = nil
 
 function guarantee.DebugLog(message)
 	if config.debugLog then
@@ -9,10 +12,13 @@ function guarantee.DebugLog(message)
 	end
 end
 
+--- Skip hub-only or single-Empty legal encounter lists (no real combat pool).
 ---@param room table
+---@param currentRun table|nil
 ---@return boolean
-function guarantee.ShouldProcessRoom(room)
-	if not tracker.HasAnyFieldNPCEnabled() then
+function guarantee.ShouldProcessRoom(room, currentRun)
+	currentRun = currentRun or game.CurrentRun
+	if not run_modes.ShouldApplyFieldGuarantees(currentRun) then
 		return false
 	end
 	if room == nil or room.LegalEncounters == nil or room.LegalEncountersDictionary == nil then
@@ -30,6 +36,7 @@ function guarantee.ShouldProcessRoom(room)
 	return true
 end
 
+--- Phase 2+: drop vanilla cooldown NamedRequirements while forcing a pending ally.
 ---@param encounterData table
 function guarantee.StripCooldownNamedRequirements(encounterData)
 	if encounterData.GameStateRequirements == nil then
@@ -48,6 +55,16 @@ function guarantee.StripCooldownNamedRequirements(encounterData)
 	end
 end
 
+---@param encounterData table
+---@param currentRun table
+function guarantee.StripForceBypassRequirements(encounterData, currentRun)
+	guarantee.StripCooldownNamedRequirements(encounterData)
+	if run_modes.ShouldBypassChaosTrialRequirements(currentRun) then
+		encounters.StripChaosTrialBlockedRequirements(encounterData)
+		encounters.ClearChaosTrialForceDepthGates(encounterData)
+	end
+end
+
 ---@param currentRun table
 ---@param encounterData table
 ---@return boolean
@@ -59,6 +76,74 @@ function guarantee.IsBypassingCooldown(currentRun, encounterData)
 	return encounters.EncounterBelongsToNPC(encounterData.Name, state.ActiveForceNPC)
 end
 
+--- Chaos Trials omit allies from LegalEncounters; inject for the duration of one eligibility check.
+---@param room table
+---@param encounterName string
+---@param fn fun(): boolean
+---@return boolean
+function guarantee.WithTemporaryLegalEncounter(room, encounterName, fn)
+	local wasInDict = room.LegalEncountersDictionary[encounterName]
+	local listIndex = nil
+
+	if not wasInDict then
+		room.LegalEncountersDictionary[encounterName] = true
+	end
+	if room.LegalEncounters ~= nil then
+		local wasInList = false
+		for _, name in ipairs(room.LegalEncounters) do
+			if name == encounterName then
+				wasInList = true
+				break
+			end
+		end
+		if not wasInList then
+			table.insert(room.LegalEncounters, encounterName)
+			listIndex = #room.LegalEncounters
+		end
+	end
+
+	local ok, result = pcall(fn)
+	if not ok then
+		error(result)
+	end
+
+	if not wasInDict then
+		room.LegalEncountersDictionary[encounterName] = nil
+	end
+	if listIndex ~= nil and room.LegalEncounters ~= nil then
+		table.remove(room.LegalEncounters, listIndex)
+	end
+
+	return result
+end
+
+--- Eligibility for an active force pick (cooldown + bounty bypass, legal pool inject in Chaos Trials).
+---@param currentRun table
+---@param room table
+---@param encounterData table
+---@param args table|nil
+---@return boolean
+function guarantee.IsEncounterEligibleForForce(currentRun, room, encounterData, args)
+	local base = guarantee._baseIsEncounterEligible
+	if base == nil then
+		return game.IsEncounterEligible(currentRun, room, encounterData, args)
+	end
+
+	local function checkWithBypass()
+		if guarantee.IsBypassingCooldown(currentRun, encounterData) then
+			return guarantee.IsEligibleWithoutCooldown(base, currentRun, room, encounterData, args)
+		end
+		return base(currentRun, room, encounterData, args)
+	end
+
+	if run_modes.ShouldBypassChaosTrialRequirements(currentRun)
+		and not room.LegalEncountersDictionary[encounterData.Name] then
+		return guarantee.WithTemporaryLegalEncounter(room, encounterData.Name, checkWithBypass)
+	end
+
+	return checkWithBypass()
+end
+
 ---@param base function
 ---@param currentRun table
 ---@param room table
@@ -67,10 +152,11 @@ end
 ---@return boolean
 function guarantee.IsEligibleWithoutCooldown(base, currentRun, room, nextEncounterData, args)
 	local copy = game.DeepCopyTable(nextEncounterData)
-	guarantee.StripCooldownNamedRequirements(copy)
+	guarantee.StripForceBypassRequirements(copy, currentRun)
 	return base(currentRun, room, copy, args)
 end
 
+--- Swap to intro encounter when vanilla would force a first-meeting variant.
 ---@param encounterData table
 ---@return table
 function guarantee.ApplyIntroEncounterSwap(encounterData)
@@ -96,7 +182,9 @@ end
 ---@param args table|nil
 ---@return table|nil
 function guarantee.TryEncounterForForce(currentRun, room, encounterName, args)
-	if not room.LegalEncountersDictionary[encounterName] then
+	-- Chaos Trials drop allies from the room pool; eligibility bypass handles the rest.
+	if not room.LegalEncountersDictionary[encounterName]
+		and not run_modes.ShouldBypassChaosTrialRequirements(currentRun) then
 		return nil
 	end
 	local encounterData = game.EncounterData[encounterName]
@@ -106,7 +194,15 @@ function guarantee.TryEncounterForForce(currentRun, room, encounterName, args)
 	if currentRun.IsDreamRun and encounters.IsDreamBlockedEncounter(encounterName) then
 		return nil
 	end
-	if not game.IsEncounterEligible(currentRun, room, encounterData, args) then
+	-- Chaos Trials: curated ally pool is authoritative; vanilla IsEncounterEligible stays too strict.
+	if run_modes.ShouldBypassChaosTrialRequirements(currentRun)
+		and guarantee.IsBypassingCooldown(currentRun, encounterData) then
+		return guarantee.ApplyIntroEncounterSwap(encounterData)
+	end
+	if not guarantee.IsEncounterEligibleForForce(currentRun, room, encounterData, args) then
+		if config.debugLog then
+			guarantee.DebugLog("  " .. encounterName .. " not eligible for force in this room")
+		end
 		return nil
 	end
 	return guarantee.ApplyIntroEncounterSwap(encounterData)
@@ -117,7 +213,7 @@ end
 ---@param args table|nil
 ---@return table|nil
 function guarantee.TryPickForcedEncounter(currentRun, room, args)
-	if not guarantee.ShouldProcessRoom(room) then
+	if not guarantee.ShouldProcessRoom(room, currentRun) then
 		return nil
 	end
 
@@ -126,6 +222,8 @@ function guarantee.TryPickForcedEncounter(currentRun, room, args)
 		return nil
 	end
 
+	tracker.EnsureInitialized(currentRun)
+	tracker.EnsureChaosTrialSetup(currentRun, biome)
 	tracker.MarkBiomeEntered(currentRun, biome)
 
 	local state = tracker.GetState(currentRun)
@@ -151,6 +249,11 @@ function guarantee.TryPickForcedEncounter(currentRun, room, args)
 					guarantee.DebugLog("Forcing " .. picked.Name .. " for pending " .. npc .. " in biome " .. biome)
 					return picked
 				end
+				guarantee.DebugLog(
+					"Pending " .. npc .. " in biome " .. biome .. ": no eligible encounter could be forced"
+				)
+			else
+				guarantee.DebugLog("Pending " .. npc .. " in biome " .. biome .. ": no encounter pool for this ally")
 			end
 		end
 	end
@@ -158,7 +261,14 @@ function guarantee.TryPickForcedEncounter(currentRun, room, args)
 	return nil
 end
 
+---@param base function
+---@param currentRun table
+---@param room table
+---@param nextEncounterData table
+---@param args table|nil
+---@return boolean
 function guarantee.WrapIsEncounterEligible(base, currentRun, room, nextEncounterData, args)
+	guarantee._baseIsEncounterEligible = base
 	if base(currentRun, room, nextEncounterData, args) then
 		return true
 	end
@@ -168,6 +278,11 @@ function guarantee.WrapIsEncounterEligible(base, currentRun, room, nextEncounter
 	return guarantee.IsEligibleWithoutCooldown(base, currentRun, room, nextEncounterData, args)
 end
 
+---@param base function
+---@param currentRun table
+---@param room table
+---@param args table|nil
+---@return table|nil
 function guarantee.WrapChooseEncounter(base, currentRun, room, args)
 	args = args or {}
 
@@ -183,6 +298,7 @@ function guarantee.WrapChooseEncounter(base, currentRun, room, args)
 	return base(currentRun, room, args)
 end
 
+--- Register all guarantee Path.Wrap hooks (idempotent via ready.lua guard).
 function guarantee.RegisterHooks()
 	modutil.mod.Path.Wrap("StartNewRun", tracker.WrapStartNewRun, mod)
 	modutil.mod.Path.Wrap("StartRoom", tracker.WrapStartRoom, mod)

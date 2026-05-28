@@ -14,7 +14,8 @@
 <!-- How did you verify this in-game or locally? -->
 
 - [ ] Tested with r2modman + symlinked `src` (or imported package)
-- [ ] Config / README / CHANGELOG updated where needed
+- [ ] Config / in-game settings UI / README / CHANGELOG updated where needed
+- [ ] Existing `.cfg` upgrades cleanly after a Chalk `version` bump or key move (`config_migrate.lua`, if applicable)
 - [ ] `debugLog` used for guarantee logic (if applicable)
 
 **Test details:**
@@ -28,5 +29,5 @@
 ## Checklist
 
 - [ ] PR is focused (no unrelated drive-by changes)
-- [ ] New config keys include `descript` text and README table row (if user-facing)
+- [ ] New config keys include `descript` text, in-game UI in `src/imgui.lua`, README Settings reference row, and `config_migrate.lua` step if keys moved (if user-facing)
 - [ ] [`src/def.lua`](../src/def.lua) updated if public API changed

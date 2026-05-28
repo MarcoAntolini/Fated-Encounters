@@ -1,5 +1,5 @@
 ---@meta _
--- Post-True Ending Infernal Contract: always offer until the player accepts it.
+-- Post–True Ending Infernal Contract: force offer on eligible contract rooms until accepted.
 
 zagreus = {}
 
@@ -31,7 +31,7 @@ end
 ---@param room table
 ---@return boolean
 function zagreus.ShouldForceContractOnRoom(room)
-	if not config.guaranteeZagContract then
+	if not run_modes.ShouldApplyZagGuarantee(game.CurrentRun) then
 		return false
 	end
 	local state = tracker.GetState()
@@ -44,6 +44,10 @@ function zagreus.ShouldForceContractOnRoom(room)
 	return game.IsGameStateEligible(room, zagreus.ContractRequirementNoChance)
 end
 
+---@param base function
+---@param roomData table
+---@param args table|nil
+---@return table
 function zagreus.WrapCreateRoom(base, roomData, args)
 	local room = base(roomData, args)
 	if zagreus.ShouldForceContractOnRoom(room) then
@@ -53,6 +57,10 @@ function zagreus.WrapCreateRoom(base, roomData, args)
 	return room
 end
 
+---@param base function
+---@param currentRun table
+---@param exitDoor table
+---@param args table|nil
 function zagreus.WrapContractExitPresentation(base, currentRun, exitDoor, args)
 	base(currentRun, exitDoor, args)
 	local state = tracker.GetState(currentRun)
@@ -62,6 +70,7 @@ function zagreus.WrapContractExitPresentation(base, currentRun, exitDoor, args)
 	end
 end
 
+--- Register CreateRoom and ContractExitPresentation wraps.
 function zagreus.RegisterHooks()
 	modutil.mod.Path.Wrap("CreateRoom", zagreus.WrapCreateRoom, mod)
 	modutil.mod.Path.Wrap("ContractExitPresentation", zagreus.WrapContractExitPresentation, mod)

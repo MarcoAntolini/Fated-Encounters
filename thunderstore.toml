@@ -5,8 +5,8 @@ schemaVersion = "0.0.1"
 [package]
 namespace = "MarcoAntolini"
 name = "FatedEncounters"
-versionNumber = "0.3.3"
-description = "Meet Nemesis, Artemis, Heracles, Icarus, and Athena once every run. After the True Ending, optionally guarantee Zagreus's Infernal Contract and Chronos at the hub between Erebus and Oceanus. Toggle each character and shuffle regions in r2modman."
+versionNumber = "0.4.0"
+description = "Meet Nemesis, Artemis, Heracles, Icarus, and Athena once every run. After True Ending, optionally guarantee Zagreus's Infernal Contract and reformed Chronos in the Erebus–Oceanus hub. In-game settings or r2modman. Optional Chaos Trials and Dream Dives support."
 websiteUrl = "https://github.com/MarcoAntolini/Fated-Encounters"
 containsNsfwContent = false
 
