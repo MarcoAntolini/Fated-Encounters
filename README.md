@@ -1,8 +1,8 @@
+<div align="center">
 
+![Fated Encounters mod banner](./images/banner.png)
 
-Fated Encounters mod banner
-
-
+</div>
 
 # Fated Encounters
 
@@ -35,11 +35,11 @@ A Hades II mod that makes sure you do not miss important encounters on a run: co
 
 ## Settings reference
 
+<div align="center">
 
+![Fated Encounters settings panel in the mod overlay](./images/gui.png)
 
-Fated Encounters settings panel in the mod overlay
-
-
+</div>
 
 Open **Fated Encounters** from the mod overlay menu bar, or pick the floating panel in the mod list. The table below maps each in-game section and label to its r2modman config key. Both edit the same file—in r2modman, click **Refresh All Edits** after in-game changes; in-game picks up r2modman saves within a couple of seconds.
 
